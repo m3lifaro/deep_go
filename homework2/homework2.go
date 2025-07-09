@@ -16,26 +16,26 @@ func NewCircularQueue[T int8 | int16 | int32 | int64](size int) CircularQueue[T]
 }
 
 func (q *CircularQueue[T]) Push(value T) bool {
-	if !q.Full() {
-		q.rear = (q.rear + 1) % len(q.values)
-		q.values[q.rear] = value
-		q.size++
-		return true
+	if q.Full() {
+		return false
 	}
-	return false
+	q.rear = (q.rear + 1) % len(q.values)
+	q.values[q.rear] = value
+	q.size++
+	return true
 }
 
 func (q *CircularQueue[T]) Pop() bool {
-	if !q.Empty() {
-		q.front = (q.front + 1) % len(q.values)
-		q.size--
-		if q.size == 0 {
-			q.front = 0
-			q.rear = -1
-		}
-		return true
+	if q.Empty() {
+		return false
 	}
-	return false
+	q.front = (q.front + 1) % len(q.values)
+	q.size--
+	if q.size == 0 {
+		q.front = 0
+		q.rear = -1
+	}
+	return true
 }
 
 func (q *CircularQueue[T]) Front() T {
