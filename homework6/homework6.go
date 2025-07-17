@@ -1,7 +1,5 @@
 package homework6
 
-import "fmt"
-
 type Option func(*GamePerson)
 
 func WithName(name string) Option {
@@ -155,9 +153,6 @@ func (p *GamePerson) Mana() int {
 	var leading = uint(p.hm[0]) & 0b1111
 	var trailing = (uint(p.hm[1]) >> 2) & 0b111111
 	var res = leading<<6 | trailing
-	fmt.Printf("Двоичное представление: %b\n", leading)
-	fmt.Printf("Двоичное представление: %b\n", trailing)
-	fmt.Printf("Двоичное представление: %b\n", res)
 	return int(res)
 }
 
